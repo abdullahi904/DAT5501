@@ -26,4 +26,3 @@ while day <= days_in_month:
     day += 1
 
 print()  # Final newline at the end
-# ...existing code...  
