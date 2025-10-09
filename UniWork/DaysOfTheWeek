@@ -1,0 +1,29 @@
+
+# Calendar Printer
+
+# Ask for user input
+days_in_month = int(input("How many days in the month (28-31): "))
+start_day = int(input("What is the starting day of the week (1=Sun, 2=Mon, 3=Tues, 4=Weds, 5=Thurs, 6=Fri, 7=Sat): "))
+
+# Print the header
+print("S M T W T F S")
+
+# Print initial spacing
+print("   " * start_day, end="")
+
+# Print the days
+day = 1
+while day <= days_in_month:# ...existing code...
+
+    current_position = start_day  # Track the current day of the week
+
+while day <= days_in_month:
+    print(f"{day:2}", end=" ")
+    current_position += 1
+    if current_position > 7:
+        print()  # New line after Saturday
+        current_position = 1
+    day += 1
+
+print()  # Final newline at the end
+# ...existing code...  
