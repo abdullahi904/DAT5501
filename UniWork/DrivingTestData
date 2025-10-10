@@ -1,0 +1,49 @@
+import pandas as pd
+
+df = pd.read_csv('C:/Users/agedow001/Downloads/passRateByAge.csv')
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+df = pd.read_csv('C:/Users/agedow001/Downloads/passRateByAge.csv')
+
+# Rename columns for easier access
+df.columns = [col.strip() for col in df.columns]
+df.rename(columns={'Pass rate (Percentage)': 'PassRate'}, inplace=True)
+
+# Remove rows with non-integer ages & get average pass rates for each age
+df = df[df['Age'].apply(lambda x: str(x).isdigit())]
+df['Age'] = df['Age'].astype(int)
+
+# Convert PassRate to numeric
+df['PassRate'] = pd.to_numeric(df['PassRate'], errors='coerce')
+
+# Drop rows with missing values
+df.dropna(subset=['Age', 'PassRate'], inplace=True)
+df = df.groupby('Age', as_index=False)['PassRate'].mean()
+
+# Prepare data for regression
+X = df[['Age']]
+y = df['PassRate']
+
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict values for plotting
+X_range = np.linspace(X.min(), X.max(), 100).reshape(-1, 1)
+y_pred = model.predict(X_range)
+
+# Plot
+plt.figure(figsize=(10, 6))
+plt.scatter(df['Age'], df['PassRate'], color='blue', label='Actual Data')
+plt.plot(X_range, y_pred, color='red', label='Regression Line')
+plt.title('Pass Rate by Age')
+plt.xlabel('Age')
+plt.ylabel('Pass Rate (%)')
+plt.legend()
+plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+
