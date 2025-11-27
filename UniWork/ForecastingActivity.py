@@ -20,7 +20,7 @@ mu, s = tr_x.mean(), tr_x.std() or 1.0          # scale to reduce numeric issues
 Xtr, Xte = (tr_x-mu)/s, (te_x-mu)/s
 
 results, preds = [], {}
-for deg in range(1,10):
+for deg in range(1,5):
     p = np.polyfit(Xtr, tr_y, deg)
     yhat = np.polyval(p, Xte)
     mae = np.mean(np.abs(te_y - yhat))
@@ -44,10 +44,10 @@ plt.title(f"GDP per capita forecast: {country_name}")
 plt.xlabel("Year"); plt.ylabel(gdp_col); plt.legend(ncol=2, fontsize=8); plt.grid(True, alpha=0.3)
 plt.tight_layout(); plt.show()
 
-# --- Model testing: reduced chi^2 and BIC on training fit ---
+# Model testing: reduced chi^2 and BIC on training fit 
 n = len(tr_y)
 deg_list, redchi2, bic = [], [], []
-for deg in range(1, 10):
+for deg in range(1, 5):
     p = np.polyfit(Xtr, tr_y, deg)
     fit = np.polyval(p, Xtr)
     rss = np.sum((tr_y - fit)**2)
@@ -71,4 +71,5 @@ plt.plot(deg_list, redchi2, 'o-', label='reduced chi^2')
 plt.plot(deg_list, bic, 'o-', label='BIC')
 plt.xlabel('Polynomial degree'); plt.grid(True, alpha=0.3)
 plt.title('Model testing metrics (training fit)')
-plt.legend(); plt.tight_layout(); plt.show()
+plt.legend(); plt.tight_layout()
+plt.show()
