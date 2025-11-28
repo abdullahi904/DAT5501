@@ -1,0 +1,1 @@
+For my group project, this script analyzes driving test data with Age and Pass rate (%). It averages pass rate by age and plots a graph: blue dots = average pass rate for each age; red line = linear trend showing how pass rate changes with age
