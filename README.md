@@ -1,0 +1,1 @@
+This repository is a collection of university lab tasks, with unit tests included for some exercises. It also contains my personal project, Book Recommender, which suggests books to read from a CSV. Finally, it includes work from our group project exploring factors that affect passing a driving test (e.g., pass rate by age).
